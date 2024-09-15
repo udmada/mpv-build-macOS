@@ -61,6 +61,7 @@ cmake --build "${builddir}"
 rm -rf "${pkgdir}"
 
 cmake --install "${builddir}"
+/usr/bin/libtool -static -o "${builddir}"/libx265.a "${builddir}"/libx265_main10.a "${builddir}"/libx265_main12.a 2>/dev/null
 rm -f "${pkgdir}"/lib/*.a
 stow -Rd "${STOWDIR}" "${pkgname}"
 

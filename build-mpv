@@ -22,6 +22,8 @@ meson setup "${builddir}" "${srcdir}" \
   --prefix="${pkgdir}" \
   -Dwrap_mode=nodownload \
   -Dbuildtype=release \
+  -Dlibmpv=true \
+  -Djavascript=enabled \
   -Db_lto=true \
   -Db_lto_mode=thin \
   -Dlua=luajit \
@@ -29,7 +31,7 @@ meson setup "${builddir}" "${srcdir}" \
   -Dgl=disabled \
   -Dmacos-touchbar=disabled \
   "$@"
-
+  # -Duchardet=enabled \
 meson compile -C "${builddir}"
 
 if [ -n "${bundle}" ]; then

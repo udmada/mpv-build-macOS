@@ -23,8 +23,10 @@ cd "${srcdir}"
   --enable-version3 \
   --enable-nonfree \
   --enable-lcms2 \
+  --enable-libaom \
   --enable-libass \
   --enable-libbluray \
+  --enable-libbs2b \
   --enable-libdav1d \
   --enable-libdvdnav \
   --enable-libdvdread \
@@ -41,11 +43,11 @@ cd "${srcdir}"
   --enable-libx264 \
   --enable-libx265 \
   --enable-libxml2 \
-  --disable-static \
   --disable-debug \
   --disable-doc \
-  --disable-sdl2 \
   --disable-libxcb \
+  --disable-sdl2 \
+  --disable-static \
   --disable-xlib \
   --disable-hwaccels \
   --enable-hwaccel=av1_videotoolbox \
@@ -55,7 +57,15 @@ cd "${srcdir}"
   --enable-hwaccel=prores_videotoolbox \
   --enable-hwaccel=vp9_videotoolbox \
   "$@"
-
+    # --enable-libzmq \
+  # --enable-audiotoolbox \
+    # --enable-vulkan \
+  #     --disable-indev=jack \
+  # --disable-libjack \
+  # --disable-libtesseract \
+    # --enable-hwaccel=h263_videotoolbox \
+    # --enable-hwaccel=mpeg1_videotoolbox \
+  # --enable-hwaccel=mpeg2_videotoolbox \
 make -j4
 
 rm -rf "${pkgdir}"
