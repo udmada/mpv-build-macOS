@@ -20,6 +20,7 @@ cd "${srcdir}"
   --enable-shared \
   --enable-lto=thin \
   --enable-gpl \
+  --enable-audiotoolbox \
   --enable-version3 \
   --enable-nonfree \
   --enable-lcms2 \
@@ -43,9 +44,13 @@ cd "${srcdir}"
   --enable-libx264 \
   --enable-libx265 \
   --enable-libxml2 \
+  --enable-vulkan \
   --disable-debug \
   --disable-doc \
+  --disable-indev=jack \
   --disable-libxcb \
+  --disable-libjack \
+  --disable-libtesseract \
   --disable-sdl2 \
   --disable-static \
   --disable-xlib \
@@ -53,19 +58,13 @@ cd "${srcdir}"
   --enable-hwaccel=av1_videotoolbox \
   --enable-hwaccel=h264_videotoolbox \
   --enable-hwaccel=hevc_videotoolbox \
+  --enable-hwaccel=mpeg1_videotoolbox \
+  --enable-hwaccel=mpeg2_videotoolbox \
   --enable-hwaccel=mpeg4_videotoolbox \
   --enable-hwaccel=prores_videotoolbox \
   --enable-hwaccel=vp9_videotoolbox \
   "$@"
-    # --enable-libzmq \
-  # --enable-audiotoolbox \
-    # --enable-vulkan \
-  #     --disable-indev=jack \
-  # --disable-libjack \
-  # --disable-libtesseract \
-    # --enable-hwaccel=h263_videotoolbox \
-    # --enable-hwaccel=mpeg1_videotoolbox \
-  # --enable-hwaccel=mpeg2_videotoolbox \
+
 make -j4
 
 rm -rf "${pkgdir}"
