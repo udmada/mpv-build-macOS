@@ -48,6 +48,14 @@ fetch_libdvdread() {
   mv -v src/libdvdread-"${version}" src/libdvdread
 }
 
+fetch_libbluray() {
+  local version="1.3.4"
+  local url="https://download.videolan.org/pub/videolan/libbluray/${version}/libbluray-${version}.tar.bz2"
+  rm -rf src/libbluray
+  curl -sL "${url}" | tar -xvC src -
+  mv -v src/libbluray-"${version}" src/libbluray
+}
+
 fetch_libplacebo &
 P_libplacebo=$!
 
@@ -66,7 +74,10 @@ P_libdvdnav=$!
 fetch_libdvdread &
 P_libdvdread=$!
 
-wait $P_libplacebo $P_libunibreak $P_mpv $P_opus $P_libdvdnav $P_libdvdread;
+fetch_libbluray &
+P_libbluray=$!
+
+wait $P_libplacebo $P_libunibreak $P_mpv $P_opus $P_libdvdnav $P_libdvdread $P_libbluray;
 
 # Iterate through each subdirectory
 for dir in "$src_directory"/*; do
