@@ -54,15 +54,6 @@ cd "${srcdir}"
   --disable-sdl2 \
   --disable-static \
   --disable-xlib \
-  --disable-hwaccels \
-  --enable-hwaccel=av1_videotoolbox \
-  --enable-hwaccel=h264_videotoolbox \
-  --enable-hwaccel=hevc_videotoolbox \
-  --enable-hwaccel=mpeg1_videotoolbox \
-  --enable-hwaccel=mpeg2_videotoolbox \
-  --enable-hwaccel=mpeg4_videotoolbox \
-  --enable-hwaccel=prores_videotoolbox \
-  --enable-hwaccel=vp9_videotoolbox \
   "$@"
 
 make -j4
