@@ -6,6 +6,17 @@
 cd "$(dirname "$0")"
 set -a; . .env; set +a
 
+# Version management
+BACKUP_FILE="src/mpv/MPV_VERSION.bak"
+
+# Update version with git hash before build
+GIT_HASH=$(git rev-parse --short HEAD)
+if [ ! -f "$BACKUP_FILE" ]; then
+    cp src/mpv/MPV_VERSION "$BACKUP_FILE"
+fi
+sed -i '' "s/UNKNOWN/$GIT_HASH/" src/mpv/MPV_VERSION
+echo "Updated version with git hash: $GIT_HASH"
+
 pkgname="mpv"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/mpv"
@@ -37,6 +48,9 @@ if [ -n "${bundle}" ]; then
   mkdir -p ~/.config/vulkan
   ln -sfn "${PREFIX}"/etc/vulkan/icd.d ~/.config/vulkan/icd.d
 
+  # Remove existing bundle if it exists
+  rm -f mpv.tar.gz
+
   meson compile -C "${builddir}" macos-bundle
   tar -czvf mpv.tar.gz -C "${builddir}" mpv.app
 fi
@@ -47,3 +61,10 @@ meson install -C "${builddir}" --tags runtime,devel
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+# Revert version changes after build
+if [ -f "$BACKUP_FILE" ]; then
+    cp "$BACKUP_FILE" src/mpv/MPV_VERSION
+    rm "$BACKUP_FILE"
+    echo "Reverted version to original state"
+fi
