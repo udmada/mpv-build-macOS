@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # x265
 # https://bitbucket.org/multicoreware/x265_git.git
@@ -10,6 +10,9 @@ pkgname="x265"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/x265/source"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"{,-10,-12}
 
@@ -66,3 +69,5 @@ rm -f "${pkgdir}"/lib/*.a
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"{,-10,-12}
+
+echo "*** $0: finished"

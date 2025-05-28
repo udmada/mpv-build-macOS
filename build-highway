@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # Highway
 # https://github.com/google/highway.git
@@ -10,6 +10,9 @@ pkgname="highway"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/highway"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -33,3 +36,5 @@ rm -rf "${pkgdir}"/lib/cmake
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

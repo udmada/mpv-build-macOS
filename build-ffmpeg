@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # FFmpeg
 # https://git.ffmpeg.org/ffmpeg.git
@@ -9,6 +9,9 @@ set -a; . .env; set +a
 pkgname="ffmpeg"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/ffmpeg"
+
+echo
+echo "*** $0: started"
 
 cd "${srcdir}"
 
@@ -63,3 +66,5 @@ rm -rf "${pkgdir}"
 make install
 rm -rf "${pkgdir}"/share
 stow -Rd "${STOWDIR}" "${pkgname}"
+
+echo "*** $0: finished"

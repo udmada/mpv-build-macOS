@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # shaderc
 # https://github.com/google/shaderc.git
@@ -10,6 +10,9 @@ pkgname="shaderc"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/shaderc"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -37,3 +40,5 @@ rm -rf "${pkgdir}"/{bin,lib/{*.a,pkgconfig/*{combined,static}.pc}}
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

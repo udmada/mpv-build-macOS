@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # LuaJIT
 # https://github.com/LuaJIT/LuaJIT.git
@@ -9,6 +9,9 @@ set -a; . .env; set +a
 pkgname="luajit"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/LuaJIT"
+
+echo
+echo "*** $0: started"
 
 make -C "${srcdir}" -j4 amalg \
   PREFIX="${pkgdir}" \
@@ -21,3 +24,5 @@ rm -rf "${pkgdir}"
 make -C "${srcdir}" install PREFIX="${pkgdir}"
 rm -rf "${pkgdir}"/{bin,lib/lua,share}
 stow -Rd "${STOWDIR}" "${pkgname}"
+
+echo "*** $0: finished"

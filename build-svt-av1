@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # SVT-AV1
 # https://gitlab.com/AOMediaCodec/SVT-AV1.git
@@ -10,6 +10,9 @@ pkgname="svt-av1"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/SVT-AV1"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -31,3 +34,5 @@ cmake --install "${builddir}"
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

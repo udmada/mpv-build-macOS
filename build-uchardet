@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # uchardet
 # https://gitlab.freedesktop.org/uchardet/uchardet.git
@@ -10,6 +10,9 @@ pkgname="uchardet"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/uchardet"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -32,3 +35,5 @@ rm -rf "${pkgdir}"/{lib/cmake,share}
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

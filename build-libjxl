@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # libjxl
 # https://github.com/libjxl/libjxl.git
@@ -10,6 +10,9 @@ pkgname="libjxl"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/libjxl"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -44,3 +47,5 @@ cmake --install "${builddir}"
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # libbluray
 # https://code.videolan.org/videolan/libbluray.git
@@ -10,6 +10,9 @@ pkgname="libbluray"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/libbluray"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -35,3 +38,5 @@ meson install -C "${builddir}"
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

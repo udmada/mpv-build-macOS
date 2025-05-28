@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # GNU FriBidi
 # https://github.com/fribidi/fribidi.git
@@ -10,6 +10,9 @@ pkgname="fribidi"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/fribidi"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -33,3 +36,5 @@ meson install -C "${builddir}"
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

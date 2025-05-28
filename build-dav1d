@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # dav1d
 # https://code.videolan.org/videolan/dav1d.git
@@ -10,6 +10,9 @@ pkgname="dav1d"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/dav1d"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -31,3 +34,5 @@ meson install -C "${builddir}"
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # libarchive
 # https://github.com/libarchive/libarchive.git
@@ -11,11 +11,15 @@ pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/libarchive"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
 
+echo
+echo "*** $0: started"
+
 rm -rf "${builddir}"
 
 cmake -B "${builddir}" -S "${srcdir}" \
   -DCMAKE_INSTALL_PREFIX="${pkgdir}" \
   -DCMAKE_INSTALL_NAME_DIR="${pkgdir}/lib" \
+  -DCMAKE_INSTALL_LIBDIR="lib" \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON \
   -DENABLE_LZ4=OFF \
@@ -37,3 +41,5 @@ rm -rf "${pkgdir}"/{lib/*.a,share}
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

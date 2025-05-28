@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # mpv
 # https://github.com/mpv-player/mpv.git
@@ -26,6 +26,9 @@ if [ "$1" == "--bundle" ]; then
   bundle=1
   shift
 fi
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -69,3 +72,4 @@ if [ -f "$BACKUP_FILE" ]; then
     rm "$BACKUP_FILE"
     echo "Reverted version to original state"
 fi
+echo "*** $0: finished"

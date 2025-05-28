@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # libvpx
 # https://chromium.googlesource.com/webm/libvpx
@@ -9,6 +9,9 @@ set -a; . .env; set +a
 pkgname="libvpx"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/libvpx"
+
+echo
+echo "*** $0: started"
 
 cd "${srcdir}"
 
@@ -45,3 +48,5 @@ for lib in "${pkgdir}"/lib/*.dylib; do
 done
 
 stow -Rd "${STOWDIR}" "${pkgname}"
+
+echo "*** $0: finished"

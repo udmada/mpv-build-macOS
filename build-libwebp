@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # libwebp
 # https://chromium.googlesource.com/webm/libwebp
@@ -10,6 +10,9 @@ pkgname="libwebp"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/libwebp"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -39,3 +42,5 @@ rm -rf "${pkgdir}"/share
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # x264
 # https://code.videolan.org/videolan/x264.git
@@ -9,6 +9,9 @@ set -a; . .env; set +a
 pkgname="x264"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/x264"
+
+echo
+echo "*** $0: started"
 
 cd "${srcdir}"
 
@@ -26,3 +29,5 @@ rm -rf "${pkgdir}"
 
 make install
 stow -Rd "${STOWDIR}" "${pkgname}"
+
+echo "*** $0: finished"

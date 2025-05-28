@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # libpng
 # https://github.com/pnggroup/libpng.git
@@ -10,6 +10,9 @@ pkgname="libpng"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/libpng"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -33,3 +36,5 @@ rm -rf "${pkgdir}"/{bin,lib/cmake,share}
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

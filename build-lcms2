@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # Little-CMS
 # https://github.com/mm2/Little-CMS.git
@@ -10,6 +10,9 @@ pkgname="lcms2"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/Little-CMS"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}"
 
@@ -31,3 +34,5 @@ meson install -C "${builddir}"
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"

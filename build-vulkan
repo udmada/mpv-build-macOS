@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env -S bash -e
 #
 # Vulkan Headers
 # https://github.com/KhronosGroup/Vulkan-Headers.git
@@ -14,6 +14,9 @@ pkgdir="${STOWDIR}/${pkgname}"
 headerssrcdir="src/Vulkan-Headers"
 loadersrcdir="src/Vulkan-Loader"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
 
 rm -rf "${builddir}" "${pkgdir}"
 
@@ -41,3 +44,5 @@ rm -rf "${pkgdir}"/{lib/cmake,loader,share/cmake}
 stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
+
+echo "*** $0: finished"
