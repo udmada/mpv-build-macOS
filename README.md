@@ -1,13 +1,14 @@
 # mpv-build-macOS
 
 [![Build & Upload Artifact](https://github.com/m154k1/mpv-build-macOS/actions/workflows/build.yml/badge.svg)](https://github.com/m154k1/mpv-build-macOS/actions/workflows/build.yml)
+[![Lint](https://github.com/m154k1/mpv-build-macOS/actions/workflows/lint.yml/badge.svg)](https://github.com/m154k1/mpv-build-macOS/actions/workflows/lint.yml)
 
 A set of scripts that help build [mpv](https://mpv.io) on macOS.
 
 > [!TIP]
 > Prebuilt mpv.app from GitHub Actions is available at [nightly.link].
 >
-> Download: [`mpv-macos-15-arm64.zip`] (macOS 15.4 & Apple M1 or newer)
+> Download: [`mpv-macos-15-arm64.zip`] (macOS 15.5 & Apple M1 or newer)
 
 ### Requirements
 

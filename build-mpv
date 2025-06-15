@@ -1,4 +1,4 @@
-#!/usr/bin/env -S bash -e
+#!/bin/bash -e
 #
 # mpv
 # https://github.com/mpv-player/mpv.git
@@ -22,7 +22,7 @@ pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/mpv"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
 
-if [ "$1" == "--bundle" ]; then
+if [[ "$1" == "--bundle" ]]; then
   bundle=1
   shift
 fi
@@ -47,7 +47,7 @@ meson setup "${builddir}" "${srcdir}" \
   # -Duchardet=enabled \
 meson compile -C "${builddir}"
 
-if [ -n "${bundle}" ]; then
+if [[ -n "${bundle}" ]]; then
   mkdir -p ~/.config/vulkan
   ln -sfn "${PREFIX}"/etc/vulkan/icd.d ~/.config/vulkan/icd.d
 
