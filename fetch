@@ -108,6 +108,7 @@ fetch_libplacebo() {
   local url="https://code.videolan.org/videolan/libplacebo.git"
   rm -rf src/libplacebo
   git -C src clone --depth 1 --recurse-submodules=3rdparty/{fast_float,jinja,markupsafe} "${url}"
+  git -C src/libplacebo apply --apply --stat "$(realpath patches/libplacebo-disable-host-copy.diff)"
 }
 
 fetch_libpng() {
@@ -184,6 +185,12 @@ fetch_vulkan() {
   git -C src clone --depth 1 "${headersurl}"
 }
 
+fetch_whisper() {
+  local url="https://github.com/ggml-org/whisper.cpp.git"
+  rm -rf src/whisper.cpp
+  git -C src clone --single-branch "${url}"
+}
+
 fetch_x264() {
   local url="https://code.videolan.org/videolan/x264.git"
   rm -rf src/x264
@@ -229,6 +236,7 @@ if [[ "$*" == "all" ]]; then
   fetch_svt-av1
   fetch_uchardet
   fetch_vulkan
+  fetch_whisper
   fetch_x264
   fetch_x265
 else
@@ -317,6 +325,9 @@ else
         ;;
       "vulkan")
         fetch_vulkan
+        ;;
+      "whisper")
+        fetch_whisper
         ;;
       "x264")
         fetch_x264
