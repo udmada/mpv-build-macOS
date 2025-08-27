@@ -8,7 +8,7 @@ set -a; . .env; set +a
 
 pkgname="whisper"
 pkgdir="${STOWDIR}/${pkgname}"
-srcdir="src/whisper.cpp"
+srcdir="../whisper.cpp"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
 
 GGML_NATIVE="$([[ -z "${CI}" ]] && echo ON || echo OFF)"
@@ -24,9 +24,9 @@ cmake -B "${builddir}" -S "${srcdir}" \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON \
   -DBUILD_SHARED_LIBS=ON \
-  -DWHISPER_BUILD_EXAMPLES=OFF \
+  -DWHISPER_BUILD_EXAMPLES=ON \
   -DWHISPER_BUILD_TESTS=OFF \
-  -DWHISPER_BUILD_SERVER=OFF \
+  -DWHISPER_BUILD_SERVER=ON \
   -DGGML_NATIVE="${GGML_NATIVE}" \
   -DGGML_LTO=ON \
   -DGGML_METAL=ON \

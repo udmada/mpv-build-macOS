@@ -187,8 +187,13 @@ fetch_vulkan() {
 
 fetch_whisper() {
   local url="https://github.com/ggml-org/whisper.cpp.git"
-  rm -rf src/whisper.cpp
-  git -C src clone --single-branch "${url}"
+  if [ -d "../whisper.cpp" ]; then
+    echo "Updating existing whisper.cpp repository..."
+    git -C "../whisper.cpp" pull
+  else
+    echo "Cloning whisper.cpp repository..."
+    git clone --single-branch "${url}" "../whisper.cpp"
+  fi
 }
 
 fetch_x264() {
