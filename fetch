@@ -57,6 +57,12 @@ fetch_highway() {
   git -C src clone --depth 1 "${url}"
 }
 
+fetch_libaom() {
+  local url="https://aomedia.googlesource.com/aom"
+  rm -rf src/aom
+  git -C src clone --depth 1 "${url}"
+}
+
 fetch_lcms2() {
   local url="https://github.com/mm2/Little-CMS.git"
   rm -rf src/Little-CMS
@@ -202,6 +208,7 @@ if [[ "$*" == "all" ]]; then
   fetch_fribidi
   fetch_harfbuzz
   fetch_highway
+  fetch_libaom
   fetch_lcms2
   fetch_libarchive
   fetch_libass
@@ -247,6 +254,9 @@ else
         ;;
       "highway")
         fetch_highway
+        ;;
+      "libaom")
+        fetch_libaom
         ;;
       "lcms2")
         fetch_lcms2

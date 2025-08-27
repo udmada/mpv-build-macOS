@@ -1,0 +1,40 @@
+#!/bin/bash -e
+#
+# libaom
+# https://aomedia.googlesource.com/aom
+#
+cd "$(dirname "$0")"
+set -a; . .env; set +a
+
+pkgname="libaom"
+pkgdir="${STOWDIR}/${pkgname}"
+srcdir="src/aom"
+builddir="${TMPDIR:-/tmp}/build.${pkgname}"
+
+echo
+echo "*** $0: started"
+
+rm -rf "${builddir}"
+
+cmake -B "${builddir}" -S "${srcdir}" \
+  -DCMAKE_INSTALL_PREFIX="${pkgdir}" \
+  -DCMAKE_INSTALL_NAME_DIR="${pkgdir}/lib" \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON \
+  -DENABLE_TESTS=OFF \
+  -DENABLE_DOCS=OFF \
+  -DENABLE_EXAMPLES=OFF \
+  -DENABLE_TOOLS=OFF \
+  -DBUILD_SHARED_LIBS=ON \
+  "$@"
+
+cmake --build "${builddir}"
+
+rm -rf "${pkgdir}"
+
+cmake --install "${builddir}"
+stow -Rd "${STOWDIR}" "${pkgname}"
+
+rm -rf "${builddir}"
+
+echo "*** $0: finished"
