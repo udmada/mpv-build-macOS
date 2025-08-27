@@ -22,7 +22,7 @@ cmake -B "${builddir}" -S "${srcdir}" \
   -DCMAKE_BUILD_TYPE=Release \
   -DNATIVE=ON \
   -DSVT_AV1_LTO=ON \
-  -DBUILD_APPS=OFF \
+  -DBUILD_APPS=ON \
   -DBUILD_TESTING=OFF \
   "$@"
 
