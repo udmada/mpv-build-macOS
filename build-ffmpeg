@@ -10,8 +10,7 @@ pkgname="ffmpeg"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/ffmpeg"
 
-echo
-echo "*** $0: started"
+echo "::group::$0"
 
 cd "${srcdir}"
 
@@ -61,4 +60,4 @@ make install
 rm -rf "${pkgdir}"/share
 stow -Rd "${STOWDIR}" "${pkgname}"
 
-echo "*** $0: finished"
+echo "::endgroup::"

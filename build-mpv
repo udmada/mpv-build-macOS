@@ -16,8 +16,7 @@ if [[ "$1" == "--bundle" ]]; then
   shift
 fi
 
-echo
-echo "*** $0: started"
+echo "::group::$0"
 
 rm -rf "${builddir}"
 
@@ -50,4 +49,4 @@ stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
 
-echo "*** $0: finished"
+echo "::endgroup::"

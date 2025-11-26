@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Create requirements.txt
-        if: hashFiles('**/requirements.txt', '**/pyproject.toml') == ''
+        if: ${{ hashFiles('**/requirements.txt', '**/pyproject.toml') == '' }}
         run: touch ./requirements.txt
 
       - name: Check
