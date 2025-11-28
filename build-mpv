@@ -27,8 +27,7 @@ if [[ "$1" == "--bundle" ]]; then
   shift
 fi
 
-echo
-echo "*** $0: started"
+echo "::group::$0"
 
 rm -rf "${builddir}"
 
@@ -72,4 +71,4 @@ if [ -f "$BACKUP_FILE" ]; then
     rm "$BACKUP_FILE"
     echo "Reverted version to original state"
 fi
-echo "*** $0: finished"
+echo "::endgroup::"

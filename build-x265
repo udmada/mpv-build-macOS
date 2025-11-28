@@ -11,8 +11,7 @@ pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/x265/source"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
 
-echo
-echo "*** $0: started"
+echo "::group::$0"
 
 rm -rf "${builddir}"{,-10,-12}
 
@@ -70,4 +69,4 @@ stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"{,-10,-12}
 
-echo "*** $0: finished"
+echo "::endgroup::"

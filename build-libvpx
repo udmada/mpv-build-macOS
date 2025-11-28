@@ -12,8 +12,7 @@ srcdir="src/libvpx"
 
 target="$(uname -m)-darwin24-gcc"
 
-echo
-echo "*** $0: started"
+echo "::group::$0"
 
 cd "${srcdir}"
 
@@ -52,4 +51,4 @@ done
 
 stow -Rd "${STOWDIR}" "${pkgname}"
 
-echo "*** $0: finished"
+echo "::endgroup::"

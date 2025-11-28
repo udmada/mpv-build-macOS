@@ -10,8 +10,7 @@ pkgname="x264"
 pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/x264"
 
-echo
-echo "*** $0: started"
+echo "::group::$0"
 
 cd "${srcdir}"
 
@@ -30,4 +29,4 @@ rm -rf "${pkgdir}"
 make install
 stow -Rd "${STOWDIR}" "${pkgname}"
 
-echo "*** $0: finished"
+echo "::endgroup::"

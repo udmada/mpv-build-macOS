@@ -8,6 +8,7 @@ on:
       - master
     paths:
       - ".github/workflows/build.yml"
+      - ".env"
       - "build-*"
       - "fetch"
 
@@ -22,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Select Xcode
         run: |
@@ -47,6 +48,15 @@ jobs:
         run: ./build-all --bundle
         env:
           MACOSX_DEPLOYMENT_TARGET: 26.1
+
+      - name: Print Summary
+        run: |
+          {
+            echo '### mpv'
+            echo '```'
+            /opt/local/bin/mpv --version
+            echo '```'
+          } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Upload Artifact
         id: upload

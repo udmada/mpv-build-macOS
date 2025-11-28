@@ -11,8 +11,7 @@ pkgdir="${STOWDIR}/${pkgname}"
 srcdir="src/libass"
 builddir="${TMPDIR:-/tmp}/build.${pkgname}"
 
-echo
-echo "*** $0: started"
+echo "::group::$0"
 
 rm -rf "${builddir}"
 
@@ -44,4 +43,4 @@ stow -Rd "${STOWDIR}" "${pkgname}"
 
 rm -rf "${builddir}"
 
-echo "*** $0: finished"
+echo "::endgroup::"
