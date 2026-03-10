@@ -1,4 +1,2 @@
-/src/**
-!/src/.gitkeep
-
 mpv.tar.gz
+.DS_Store
