@@ -31,6 +31,7 @@ fetch_ffmpeg() {
   local url="https://github.com/FFmpeg/FFmpeg.git"
   rm -rf src/ffmpeg
   git -C src clone --depth 1 "${url}" ffmpeg
+  git -C src/ffmpeg apply --apply --stat "$(realpath patches/ffmpeg-avs3da.patch)"
 }
 
 fetch_freetype() {
