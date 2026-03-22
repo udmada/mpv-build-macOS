@@ -27,7 +27,7 @@ jobs:
 
       - name: Select Xcode
         run: |
-          sudo xcode-select -s /Applications/Xcode_26.2.app
+          sudo xcode-select -s /Applications/Xcode_26.3.app
           xcodebuild -version
 
       - name: Create Stow Directory
@@ -47,7 +47,7 @@ jobs:
       - name: Build & Install
         run: ./build-all --bundle
         env:
-          MACOSX_DEPLOYMENT_TARGET: 26.2
+          MACOSX_DEPLOYMENT_TARGET: 26.3
 
       - name: Print Summary
         run: |
@@ -60,16 +60,14 @@ jobs:
 
       - name: Upload Artifact
         id: upload
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
-          name: mpv-macos-26-arm64
           path: mpv.tar.gz
           if-no-files-found: error
-          compression-level: 0
-          overwrite: true
+          archive: false
 
       - name: Attest Artifact
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@v4
         with:
-          subject-name: mpv-macos-26-arm64.zip
+          subject-name: mpv.tar.gz
           subject-digest: sha256:${{ steps.upload.outputs.artifact-digest }}
