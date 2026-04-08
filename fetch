@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 cd "$(dirname "$0")"
+set -a; . .env; set +a
 
 print_usage() {
   echo "Usage:"
@@ -140,6 +141,13 @@ fetch_luajit() {
   git -C src clone --depth 1 "${url}"
 }
 
+fetch_mesa() {
+  local url="https://gitlab.freedesktop.org/mesa/mesa.git"
+  rm -rf src/mesa
+  git -C src clone --depth 1 "${url}"
+  pip3 install --no-cache-dir -U mako packaging pyyaml
+}
+
 fetch_moltenvk() {
   local url="https://github.com/KhronosGroup/MoltenVK.git"
   rm -rf src/MoltenVK
@@ -171,6 +179,14 @@ fetch_shaderc() {
   git -C src clone --depth 1 "${url}"
 }
 
+fetch_spirv-tools() {
+  local tools_url="https://github.com/KhronosGroup/SPIRV-Tools.git"
+  local headers_url="https://github.com/KhronosGroup/SPIRV-Headers.git"
+  rm -rf src/SPIRV-{Tools,Headers}
+  git -C src clone --depth 1 "${tools_url}"
+  git -C src clone --depth 1 "${headers_url}"
+}
+
 fetch_svt-av1() {
   local url="https://gitlab.com/AOMediaCodec/SVT-AV1.git"
   rm -rf src/SVT-AV1
@@ -184,11 +200,11 @@ fetch_uchardet() {
 }
 
 fetch_vulkan() {
-  local loaderurl="https://github.com/KhronosGroup/Vulkan-Loader.git"
-  local headersurl="https://github.com/KhronosGroup/Vulkan-Headers.git"
+  local loader_url="https://github.com/KhronosGroup/Vulkan-Loader.git"
+  local headers_url="https://github.com/KhronosGroup/Vulkan-Headers.git"
   rm -rf src/Vulkan-{Loader,Headers}
-  git -C src clone --depth 1 "${loaderurl}"
-  git -C src clone --depth 1 "${headersurl}"
+  git -C src clone --depth 1 "${loader_url}"
+  git -C src clone --depth 1 "${headers_url}"
 }
 
 fetch_whisper() {
@@ -244,6 +260,7 @@ if [[ "$*" == "all" ]]; then
   fetch_mpv
   fetch_opus
   fetch_shaderc
+  fetch_spirv-tools
   fetch_svt-av1
   fetch_uchardet
   fetch_vulkan
@@ -316,6 +333,9 @@ else
       "luajit")
         fetch_luajit
         ;;
+      "mesa")
+        fetch_mesa
+        ;;
       "moltenvk")
         fetch_moltenvk
         ;;
@@ -327,6 +347,9 @@ else
         ;;
       "shaderc")
         fetch_shaderc
+        ;;
+      "spirv-tools")
+        fetch_spirv-tools
         ;;
       "svt-av1")
         fetch_svt-av1
