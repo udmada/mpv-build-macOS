@@ -39,6 +39,7 @@ meson setup "${builddir}" "${srcdir}" \
   -Djavascript=enabled \
   -Db_lto=true \
   -Db_lto_mode=thin \
+  -Dlibcurl=enabled \
   -Dlua=luajit \
   -Dgl=disabled \
   -Dmacos-touchbar=disabled \
