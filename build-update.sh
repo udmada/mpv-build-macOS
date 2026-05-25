@@ -12,7 +12,8 @@ fetch_libplacebo() {
 
 fetch_libunibreak() {
   local version="6.1"
-  local url="https://github.com/adah1972/libunibreak/releases/download/libunibreak_${version//./_}/libunibreak-${version}.tar.gz"
+  local baseurl="https://github.com/adah1972/libunibreak/releases/download/"
+  local url="${baseurl}libunibreak_${version//./_}/libunibreak-${version}.tar.gz"
   rm -rf src/libunibreak
   curl -sL "${url}" | tar -xvC src -
   mv -v src/libunibreak-"${version}" src/libunibreak
@@ -34,7 +35,8 @@ fetch_opus() {
 
 fetch_libdvdnav() {
   local version="6.1.1"
-  local url="https://download.videolan.org/pub/videolan/libdvdnav/${version}/libdvdnav-${version}.tar.bz2"
+  local baseurl="https://download.videolan.org/pub/videolan/libdvdnav/"
+  local url="${baseurl}${version}/libdvdnav-${version}.tar.bz2"
   rm -rf src/libdvdnav
   curl -sL "${url}" | tar -xvC src -
   mv -v src/libdvdnav-"${version}" src/libdvdnav
@@ -42,7 +44,8 @@ fetch_libdvdnav() {
 
 fetch_libdvdread() {
   local version="6.1.3"
-  local url="https://download.videolan.org/pub/videolan/libdvdread/${version}/libdvdread-${version}.tar.bz2"
+  local baseurl="https://download.videolan.org/pub/videolan/libdvdread/"
+  local url="${baseurl}${version}/libdvdread-${version}.tar.bz2"
   rm -rf src/libdvdread
   curl -sL "${url}" | tar -xvC src -
   mv -v src/libdvdread-"${version}" src/libdvdread
@@ -50,7 +53,8 @@ fetch_libdvdread() {
 
 fetch_libbluray() {
   local version="1.3.4"
-  local url="https://download.videolan.org/pub/videolan/libbluray/${version}/libbluray-${version}.tar.bz2"
+  local baseurl="https://download.videolan.org/pub/videolan/libbluray/"
+  local url="${baseurl}${version}/libbluray-${version}.tar.bz2"
   rm -rf src/libbluray
   curl -sL "${url}" | tar -xvC src -
   mv -v src/libbluray-"${version}" src/libbluray
