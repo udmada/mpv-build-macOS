@@ -3,20 +3,23 @@
 # Define the src directory
 src_directory="./src"
 
+fetch_tar() {
+  local url="$1"
+  local name="$2"
+  rm -rf src/"${name}"
+  curl -sL "${url}" | tar -xvC src -s ";^[^/]*;${name};"
+}
+
 fetch_libplacebo() {
   local url="https://code.videolan.org/videolan/libplacebo.git"
   rm -rf src/libplacebo
-  git -C src clone --single-branch --no-tags "${url}"
-  git -C src/libplacebo submodule update --init 3rdparty/{fast_float,jinja,markupsafe}
+  git -C src clone --depth 1 --recurse-submodules=3rdparty/{fast_float,jinja,markupsafe} "${url}"
 }
 
 fetch_libunibreak() {
-  local version="6.1"
-  local baseurl="https://github.com/adah1972/libunibreak/releases/download/"
-  local url="${baseurl}libunibreak_${version//./_}/libunibreak-${version}.tar.gz"
-  rm -rf src/libunibreak
-  curl -sL "${url}" | tar -xvC src -
-  mv -v src/libunibreak-"${version}" src/libunibreak
+  local version="7.0"
+  local url="https://github.com/adah1972/libunibreak/releases/download/libunibreak_${version//./_}/libunibreak-${version}.tar.gz"
+  fetch_tar "${url}" libunibreak
 }
 
 fetch_mpv() {
@@ -26,38 +29,27 @@ fetch_mpv() {
 }
 
 fetch_opus() {
-  local version="1.5.2"
-  local url="https://downloads.xiph.org/releases/opus/opus-${version}.tar.gz"
+  local url="https://github.com/xiph/opus.git"
   rm -rf src/opus
-  curl -sL "${url}" | tar -xvC src -
-  mv -v src/opus-"${version}" src/opus
-}
+  git -C src clone --single-branch "${url}"
 
-fetch_libdvdnav() {
-  local version="6.1.1"
-  local baseurl="https://download.videolan.org/pub/videolan/libdvdnav/"
-  local url="${baseurl}${version}/libdvdnav-${version}.tar.bz2"
-  rm -rf src/libdvdnav
-  curl -sL "${url}" | tar -xvC src -
-  mv -v src/libdvdnav-"${version}" src/libdvdnav
+  local model
+  cd src/opus
+  model="$(sed -nE 's;^dnn/download_model\.sh "(.+)"$;\1;p' autogen.sh)"
+  echo "dnn model checksum: '${model}'"
+  ./dnn/download_model.sh "${model}"
+  cd -
 }
 
 fetch_libdvdread() {
-  local version="6.1.3"
-  local baseurl="https://download.videolan.org/pub/videolan/libdvdread/"
-  local url="${baseurl}${version}/libdvdread-${version}.tar.bz2"
-  rm -rf src/libdvdread
-  curl -sL "${url}" | tar -xvC src -
-  mv -v src/libdvdread-"${version}" src/libdvdread
+  local url="https://code.videolan.org/videolan/libdvdread/-/archive/master/libdvdread-master.tar.bz2"
+  fetch_tar "${url}" libdvdread
 }
 
 fetch_libbluray() {
-  local version="1.3.4"
-  local baseurl="https://download.videolan.org/pub/videolan/libbluray/"
-  local url="${baseurl}${version}/libbluray-${version}.tar.bz2"
+  local url="https://code.videolan.org/videolan/libbluray.git"
   rm -rf src/libbluray
-  curl -sL "${url}" | tar -xvC src -
-  mv -v src/libbluray-"${version}" src/libbluray
+  git -C src clone --depth 1 --recurse-submodules "${url}"
 }
 
 fetch_libplacebo &
@@ -71,9 +63,6 @@ P_mpv=$!
 
 fetch_opus &
 P_opus=$!
-
-fetch_libdvdnav &
-P_libdvdnav=$!
 
 fetch_libdvdread &
 P_libdvdread=$!
@@ -94,7 +83,6 @@ for dir in "$src_directory"/*; do
         fi
     fi
 done
-
 
 
 if [ -d "$ZSH_COMPLETIONS/_mpv" ]; then
