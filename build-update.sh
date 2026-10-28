@@ -17,7 +17,7 @@ fetch_libplacebo() {
 }
 
 fetch_libunibreak() {
-  local version="7.0"
+  local version="8.0"
   local url="https://github.com/adah1972/libunibreak/releases/download/libunibreak_${version//./_}/libunibreak-${version}.tar.gz"
   fetch_tar "${url}" libunibreak
 }
@@ -53,7 +53,7 @@ fetch_libbluray() {
 }
 
 fetch_x265() {
-  local url="https://bitbucket.org/multicoreware/x265_git/get/master.tar.bz2"
+  local url="https://github.com/Multicorewareinc/x265/archive/master.tar.gz"
   fetch_tar "${url}" x265
 }
 
