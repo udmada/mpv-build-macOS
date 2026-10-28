@@ -52,6 +52,11 @@ fetch_libbluray() {
   git -C src clone --depth 1 --recurse-submodules "${url}"
 }
 
+fetch_x265() {
+  local url="https://bitbucket.org/multicoreware/x265_git/get/master.tar.bz2"
+  fetch_tar "${url}" x265
+}
+
 fetch_libplacebo &
 P_libplacebo=$!
 
@@ -70,7 +75,10 @@ P_libdvdread=$!
 fetch_libbluray &
 P_libbluray=$!
 
-wait $P_libplacebo $P_libunibreak $P_mpv $P_opus $P_libdvdnav $P_libdvdread $P_libbluray;
+fetch_x265 &
+P_x265=$!
+
+wait "${P_libplacebo}" "${P_libunibreak}" "${P_mpv}" "${P_opus}" "${P_libdvdread}" "${P_libbluray}" "${P_x265}"
 
 # Iterate through each subdirectory
 for dir in "$src_directory"/*; do

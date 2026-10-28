@@ -10,6 +10,7 @@ cd "$(dirname "$0")"
 ./build-libplacebo
 ./build-dav1d
 ./build-svt-av1
+./build-libaom
 ./build-x264
 ./build-x265
 ./build-libvpx
