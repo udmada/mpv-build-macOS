@@ -46,7 +46,6 @@ cd "${srcdir}"
   --enable-libx264 \
   --enable-libx265 \
   --enable-libxml2 \
-  --enable-openssl \
   --enable-vulkan \
   --enable-whisper \
   --disable-static \
@@ -56,6 +55,7 @@ cd "${srcdir}"
   --disable-libxcb \
   --disable-libjack \
   --disable-libtesseract \
+  --disable-securetransport \
   --disable-sdl2 \
   --disable-static \
   --disable-xlib \
